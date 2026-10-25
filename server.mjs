@@ -69,7 +69,7 @@ export function createApp(options={}) {
    try {
     const result=await fetch(options.emailURL || process.env.EMAIL_API_URL || 'https://api.resend.com/emails',{
      method:'POST',signal:AbortSignal.timeout(10000),headers:{Authorization:'Bearer '+key,'Content-Type':'application/json','Idempotency-Key':'lead-'+row.lead_id+'-'+row.id},
-     body:JSON.stringify(lead.delivery==='receipt'?{from,to:[lead.contact],...(config.email?{reply_to:config.email}:{}),subject:'Votre demande a été reçue — New Wave Acquisition',text:'Votre demande a été enregistrée. Nous vous recontacterons au sujet de votre projet. Aucun engagement ne résulte de cette demande. Pour corriger vos informations ou vous opposer au suivi, répondez à ce message.'}:{from,to:[to],subject:'[New Wave] Demande — '+lead.kind+' — '+lead.firstName,text:JSON.stringify(lead,null,2)})
+     body:JSON.stringify(lead.delivery==='receipt'?{from,to:[lead.contact],...(config.email?{reply_to:config.email}:{}),subject:'Votre demande a été reçue — New Wave Acquisition',text:'Votre demande a été enregistrée. Nous vous recontacterons au sujet de votre projet. Aucun engagement ne résulte de cette demande. Pour corriger vos informations ou vous opposer au suivi, répondez à ce message.'}:{from,to:[to],...(lead.contact.includes('@')?{reply_to:lead.contact}:{}),subject:'[New Wave] Demande — '+lead.kind+' — '+lead.firstName,text:JSON.stringify(lead,null,2)})
     });
     if(!result.ok) throw new Error('provider-'+result.status);
     store.db.prepare("UPDATE outbox SET status='sent',attempts=attempts+1,error='' WHERE id=?").run(row.id);store.event(row.lead_id,'notification_sent');sent++;
