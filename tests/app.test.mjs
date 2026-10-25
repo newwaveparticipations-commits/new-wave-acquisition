@@ -61,8 +61,8 @@ test('investor endpoint and content stay closed by default',async()=>{
 });
 test('investor path can be fully tested when deliberately enabled',async()=>{
  const f=await fixture({investorsEnabled:true});try{
-  const r=await f.request('/api/leads',{method:'POST',data:{...lead(f.token),kind:'investor',ticket:'10-25',profile:'particulier',wealthShare:'<10',ownAccount:true,risksAccepted:true}});assert.equal(r.status,201);
-  const page=await f.request('/investir');assert.equal(page.status,200);assert.match(await page.text(),/id="club-form"/);
+  const r=await f.request('/api/leads',{method:'POST',data:{...lead(f.token),kind:'investor',ticket:'undecided',profile:'individual',interestAcknowledged:true,risksAccepted:true}});assert.equal(r.status,201);
+  const page=await f.request('/investir');assert.equal(page.status,200);const html=await page.text();assert.match(html,/id="club-form"/);assert.match(html,/investor-mobile/);assert.doesNotMatch(html,/id="k-part"|id="k-propre"/);assert.equal(f.app.store.list()[0].payload.details.ticket,'undecided');assert.equal(f.app.store.db.prepare('SELECT count(*) n FROM outbox').get().n,2);
  }finally{await f.close();}
 });
 test('research creates an identified prospect with evidence, never inferred interest',async()=>{

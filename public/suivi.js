@@ -1,5 +1,7 @@
 const $=id=>document.getElementById(id);let key='',paused=false;
 const names={seller:'Cédant',investor:'Investisseur',diagnostic:'Diagnostic',valuation:'Estimation',referrer:'Prescripteur'};
+const detailLabels={ticket:'Ticket envisagé',profile:'Profil déclaré',lastName:'Nom',message:'Message',alternateContact:'Autre contact'};
+const detailValues={ticket:{undecided:'À préciser ensemble','under-10k':'Moins de 10 000 €','10-25k':'10 000 à 25 000 €','25-50k':'25 000 à 50 000 €','50-100k':'50 000 à 100 000 €','over-100k':'Plus de 100 000 €'},profile:{individual:'Particulier','active-owner':'Dirigeant en activité','former-owner':'Ancien dirigeant',professional:'Professionnel de l’investissement','company-representative':'Représentant d’une société',other:'Autre'}};
 const stages={new:'Nouvelle demande',qualifying:'À qualifier',qualified:'Qualifié',meeting:'Rendez-vous',waiting:'En attente',replied:'Réponse reçue',declined:'Refus',opposed:'Opposition',closed:'Clos'};
 const prospectStages={identified:'Identifié',reviewed:'Vérifié',contacted:'Contacté',replied:'Réponse reçue',interested:'Intérêt déclaré',meeting:'Rendez-vous',declined:'Refus',opposed:'Opposition',closed:'Clos'};
 function el(tag,text,parent){const node=document.createElement(tag);if(text!=null)node.textContent=text;parent?.append(node);return node;}
@@ -19,7 +21,7 @@ async function reload(){
  if(!l.items.length){const row=el('tr',null,rows);el('td','Aucune demande reçue.',row).colSpan=4;}
  for(const item of l.items){
   const row=el('tr',null,rows),who=el('td',null,row);el('b',item.payload.firstName,who);el('p',item.contact,who);el('small',new Date(item.created).toLocaleString('fr-FR'),who);
-  const info=el('td',null,row);el('b',names[item.kind] || item.kind,info);for(const [k,v] of Object.entries(item.payload.details||{}))if(!['answers','figures'].includes(k))el('p',`${k} : ${v}`,info);
+  const info=el('td',null,row);el('b',names[item.kind] || item.kind,info);for(const [k,v] of Object.entries(item.payload.details||{}))if(!['answers','figures'].includes(k))el('p',`${detailLabels[k]||k} : ${detailValues[k]?.[v]||v}`,info);
   const control=el('td',null,row),select=el('select',null,control);select.setAttribute('aria-label','Statut de '+item.payload.firstName);
   for(const [value,label]of Object.entries(stages)){const opt=el('option',label,select);opt.value=value;opt.selected=item.status===value;}
   select.addEventListener('change',()=>guarded(async()=>{await api('leads/'+item.id,{method:'PATCH',body:JSON.stringify({status:select.value})});status('Statut enregistré.');await reload();}));

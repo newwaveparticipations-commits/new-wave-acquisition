@@ -90,3 +90,7 @@ Rapporter les cibles pertinentes, les contacts effectivement joints, les répons
 ## Séparation des données
 
 Les dossiers confidentiels d’entreprises, documents investisseurs, accès personnels et données d’un employeur restent hors de ce dépôt. N’importer que les informations nécessaires à la mission et autorisées pour les prestataires concernés. Les secrets, contacts, oppositions, historiques et exports ne deviennent jamais des fichiers publics.
+
+## Parcours investisseurs public
+
+`/investir` recueille uniquement une demande de premier échange. `INVESTORS_ENABLED=true` active ce parcours. Champs serveur : `kind: investor`, `firstName`, `contact`, `ticket`, `profile`, `interestAcknowledged: true`, `risksAccepted: true`, avec `lastName`, `alternateContact` et `message` facultatifs. Ticket : `undecided`, `under-10k`, `10-25k`, `25-50k`, `50-100k`, `over-100k`. Profil : `individual`, `active-owner`, `former-owner`, `professional`, `company-representative`, `other`. `formToken` et contrôle d’origine restent obligatoires. Le profil est déclaratif, jamais une qualification réglementaire. Aucune question de patrimoine ni inscription automatique à une newsletter. Les e-mails sont des messages de service.

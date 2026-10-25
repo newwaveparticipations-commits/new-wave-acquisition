@@ -14,10 +14,12 @@ test('normalizes French phone and email for deduplication',()=>{
  assert.equal(normalizeContact('06 12 34 56 78'),'+33612345678');assert.equal(normalizeContact('0033 6 12 34 56 78'),'+33612345678');assert.equal(normalizeContact('JEAN@EXAMPLE.TEST'),'jean@example.test');
 });
 test('investor cannot bypass the activation or mandatory acknowledgments',()=>{
- const investor={kind:'investor',firstName:'Anne',contact:'anne@example.test',ticket:'10-25',profile:'particulier',wealthShare:'<10',ownAccount:true,risksAccepted:true};
+ const investor={kind:'investor',firstName:'Anne',contact:'anne@example.test',ticket:'undecided',profile:'individual',interestAcknowledged:true,risksAccepted:true};
  assert.throws(()=>validateLead(investor));assert.doesNotThrow(()=>validateLead(investor,{investorsEnabled:true}));
  assert.equal(validateLead({...investor,alternateContact:'06 12 34 56 78'},{investorsEnabled:true}).details.alternateContact,'+33612345678');
- for(const k of ['ticket','profile','wealthShare','ownAccount','risksAccepted'])assert.throws(()=>validateLead({...investor,[k]:''},{investorsEnabled:true}));
+ const saved=validateLead({...investor,wealthShare:'private',newsletter:true},{investorsEnabled:true});assert.equal(saved.details.wealthShare,undefined);assert.equal(saved.consent.newsletter,false);
+ assert.throws(()=>validateLead({...investor,ticket:'invented'},{investorsEnabled:true}));assert.throws(()=>validateLead({...investor,profile:'invented'},{investorsEnabled:true}));
+ for(const k of ['ticket','profile','interestAcknowledged','risksAccepted'])assert.throws(()=>validateLead({...investor,[k]:''},{investorsEnabled:true}));
 });
 test('diagnostic answers need separate permission and must match the score',()=>{
  const diagnostic={...seller,kind:'diagnostic',score:10,answers:Array(10).fill(1)};

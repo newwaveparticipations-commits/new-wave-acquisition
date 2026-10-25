@@ -20,7 +20,7 @@ Ouvrir `http://127.0.0.1:4321`. Pour le suivi privé : `/suivi`. Renseigner `ADM
 - Parcours cédant en quatre étapes et formulaire prescripteur.
 - Diagnostic en dix questions, score et chantiers débloqués après enregistrement du contact. Ses réponses restent dans le navigateur sauf accord distinct.
 - Simulateur avec calcul local, coût chargé du dirigeant remplaçant, multiples par métier et trésorerie exclusivement excédentaire. Il reste indisponible jusqu’à réception de règles validées, sans résultat fictif. La fiscalité personnelle n’est pas calculée.
-- Parcours investisseurs développé, avec activation séparée. Il recueille une manifestation d’intérêt et ne permet ni versement ni souscription.
+- Parcours investisseurs avec activation séparée : premier échange, profil déclaré, ticket envisagé (ou à préciser), coordonnées et message facultatif. Il ne recueille aucun patrimoine, versement ou souscription. Aucun statut réglementaire ne se déduit du profil déclaré.
 - Stockage SQLite persistant, historique, dédoublonnage, oppositions, suivi du responsable et de la prochaine action, export CSV privé.
 - Registre de prospects sourcés séparé des demandes entrantes. Aucun intérêt n’est déduit du seul repérage d’une personne.
 - File de notifications internes et d’accusés de réception, réessais et identifiants de livraison stables. Aucun e-mail n’est envoyé tant que le prestataire n’est pas configuré.
@@ -39,7 +39,7 @@ Ouvrir `http://127.0.0.1:4321`. Pour le suivi privé : `/suivi`. Renseigner `ADM
 | `DATA_DIR` | Dossier persistant de la base SQLite, protégé et sauvegardé |
 | `ADMIN_TOKEN` | Accès privé, transmis uniquement par en-tête Bearer |
 | `PUBLIC_READY` | `false` par défaut ; rend le site non indexable pendant la préparation |
-| `INVESTORS_ENABLED` | `false` par défaut ; active le parcours après les validations requises |
+| `INVESTORS_ENABLED` | `false` par défaut ; active le parcours de premier échange investisseurs |
 | `EMAIL_API_KEY` | Clé d’un prestataire d’envoi compatible avec l’API Resend |
 | `EMAIL_FROM` | Expéditeur vérifié chez ce prestataire ; une adresse Gmail ne peut pas être usurpée |
 | `NOTIFY_EMAIL` | Destinataire des notifications internes |

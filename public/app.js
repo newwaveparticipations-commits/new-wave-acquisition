@@ -81,12 +81,12 @@ if($('club-form')) $('club-form').addEventListener('submit',async e=>{
  const a=checkName($('k-prenom')),em=$('k-mail').value.trim(),ph=$('k-tel').value.trim();
  const b=fieldError($('k-mail'),em&&!mail(em)?'Vérifiez l’adresse e-mail.':''),c=fieldError($('k-tel'),ph&&!tel(ph)?'Vérifiez le téléphone.':'');
  const missing=[];if(!mail(em)&&!tel(ph))missing.push('un e-mail ou un téléphone');
- for(const [id,label]of [['k-ticket','le ticket'],['k-profil','le profil'],['k-part','la part du patrimoine']])if(!$(id).value)missing.push(label);
- if(!$('k-propre').checked)missing.push('la case « pour mon propre compte »');if(!$('k-risque').checked)missing.push('la lecture des risques');
+ for(const [id,label]of [['k-ticket','le ticket envisagé (ou « à préciser »)'],['k-profil','le profil']])if(!$(id).value)missing.push(label);
+ if(!$('k-interet').checked)missing.push('la confirmation de demande de premier échange');if(!$('k-risque').checked)missing.push('la lecture des risques');
  $('k-err').textContent=missing.length?'Précisez '+missing.join(', ')+'.':'';$('k-err').hidden=!missing.length;
  if(!a||!b||!c||missing.length)return;
- const result=await submit(form,{kind:'investor',firstName:$('k-prenom').value,lastName:$('k-nom').value,contact:em||ph,...(em&&ph?{alternateContact:ph}:{}),ticket:$('k-ticket').value,profile:$('k-profil').value,wealthShare:$('k-part').value,ownAccount:$('k-propre').checked,risksAccepted:$('k-risque').checked,newsletter:$('k-lettre').checked},$('k-send'));
- if(result){$('k-ok').hidden=false;$('k-send').hidden=true;$('k-ok').scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});}
+ const result=await submit(form,{kind:'investor',firstName:$('k-prenom').value,lastName:$('k-nom').value,contact:em||ph,...(em&&ph?{alternateContact:ph}:{}),ticket:$('k-ticket').value,profile:$('k-profil').value,message:$('k-message').value,interestAcknowledged:$('k-interet').checked,risksAccepted:$('k-risque').checked,newsletter:false},$('k-send'));
+ if(result){$('k-ok').hidden=false;$('k-send').hidden=true;$('k-ok').focus();$('k-ok').scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});}
 });
 if($('valuation')) $('valuation').addEventListener('submit',async e=>{
  e.preventDefault();const form=$('valuation');let valid=true;const figures={};

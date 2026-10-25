@@ -386,3 +386,18 @@ details p{margin-top:8px;color:#33373C}
 }
 
 :root{--bar:0px} body{margin:0} .site-footer{padding-block:24px;display:flex;gap:22px;flex-wrap:wrap;background:var(--beton)} .form-status{margin-top:16px;white-space:normal} .form-status:empty{display:none} button:disabled{cursor:wait;opacity:.65} .trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden} .page p+p{margin-top:16px} .page h2{margin-block:30px 12px} .view.active{min-height:65vh} ::selection{background:var(--jaune);color:var(--graphite)} input,textarea{caret-color:var(--graphite)} .skip{position:absolute;top:-100px;z-index:100;background:var(--jaune);padding:12px}.skip:focus{top:0} .information-copy{max-width:70ch} .nav a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px} .blocked{padding:28px;background:var(--beton);margin-block:24px} @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+
+/* Parcours investisseurs : même charte, accès disponible à toutes les tailles. */
+.investor-mobile{display:none}
+@media(max-width:1240px){.investor-mobile{display:block;background:var(--beton);border-bottom:1px solid #D2CEC6}.investor-mobile a{display:inline-flex;align-items:center;min-height:44px;color:var(--graphite);font-weight:600;text-underline-offset:4px}}
+.investor-page>h1{max-width:20ch}
+.investor-intro{margin-top:36px;max-width:75ch}
+.investor-intro h2,.investor-page .risks h2,.investor-page .side h2{font-size:clamp(28px,3vw,38px);line-height:1.15;margin-bottom:12px}
+.investor-steps{list-style:none;padding:0;margin:24px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.investor-steps li{border-top:2px solid var(--graphite);padding-top:12px;display:grid;gap:8px}
+.investor-steps b{font-size:20px}.investor-steps span{font-size:17px;line-height:1.5}
+.investor-page>.sec-t{font-size:clamp(32px,4vw,52px);margin:40px 0 20px}
+.investor-page .risks{max-width:75ch}.investor-page .risks p{font-size:18px;line-height:1.55}
+.investor-page .side p{margin:16px 0}.investor-page .form-grid{margin-top:0}
+.investor-page #k-send{margin-top:12px}.investor-page #k-ok{margin-top:18px}
+@media(max-width:640px){.investor-steps{grid-template-columns:minmax(0,1fr);gap:18px}.investor-page>h1{font-size:44px}.investor-page .panel{padding:20px}}
