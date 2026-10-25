@@ -1,0 +1,8 @@
+{
+  "brand": "New Wave Acquisition",
+  "phone": "",
+  "email": "",
+  "publisher": { "name": "", "address": "", "registration": "", "director": "", "hosting": "", "privacyContact": "" },
+  "criteria": { "region": "Nouvelle-Aquitaine", "sectors": ["Menuiserie / fermetures", "Électricité", "Plomberie / chauffage", "Métallerie", "Espaces verts", "Fabrication"], "revenueMin": null, "revenueMax": null, "employeesMin": null, "employeesMax": null },
+  "valuation": { "approved": false, "approvedAt": "", "replacementCostLoaded": null, "cashPolicy": "", "multiples": {} }
+}

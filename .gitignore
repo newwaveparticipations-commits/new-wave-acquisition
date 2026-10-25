@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+config.local.json
+var/
+node_modules/
+coverage/
+*.log
+.DS_Store
+.dev.vars
+.wrangler/
