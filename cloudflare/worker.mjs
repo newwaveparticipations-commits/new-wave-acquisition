@@ -121,7 +121,7 @@ export async function handle(request,env,ctx){
     throw new HttpError(404,'Route privée inconnue.');
    }
    if(req.method!=='GET' && req.method!=='HEAD') throw new HttpError(405,'Méthode non autorisée.');
-   const assets={'/favicon.svg':['favicon.svg','image/svg+xml'],'/favicon.ico':['favicon.svg','image/svg+xml'],'/site.css':['site.css','text/css'],'/app.js':['app.js','text/javascript'],'/visuals.js':['visuals.js','text/javascript'],'/fonts.css':['fonts.css','text/css'],'/suivi.js':['suivi.js','text/javascript']};
+   const assets={'/scaffold.js':['scaffold.js','text/javascript'],'/scaffold-scenes.js':['scaffold-scenes.js','text/javascript'],'/scaffold-scroll.js':['scaffold-scroll.js','text/javascript'],'/scaffold.css':['scaffold.css','text/css'],'/favicon.svg':['favicon.svg','image/svg+xml'],'/favicon.ico':['favicon.svg','image/svg+xml'],'/site.css':['site.css','text/css'],'/app.js':['app.js','text/javascript'],'/visuals.js':['visuals.js','text/javascript'],'/fonts.css':['fonts.css','text/css'],'/suivi.js':['suivi.js','text/javascript']};
    if(assets[path]) {const [file,type]=assets[path];return send(200,await asset(file),type+'; charset=utf-8',{'Cache-Control':'public,max-age=3600'});}
    if(/^\/fonts\/[a-z0-9-]+\.(?:woff2|ttf)$/.test(path)) {
     return assetResponse(path);

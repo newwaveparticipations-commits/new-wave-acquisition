@@ -167,7 +167,7 @@ button,input,select,textarea{font:inherit}
 .sol .lede{font-size:20px;max-width:46ch;margin-top:22px;color:#C9CCD0}
 .contact-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
 .contact-row .cta.ghost{color:#fff;border-color:#fff}
-.footer-giant{margin-top:70px;background:repeating-linear-gradient(-45deg,var(--jaune) 0 26px,var(--graphite) 26px 52px);padding-block:26px 0;overflow:hidden}
+.footer-giant{margin-top:70px;background:var(--graphite);padding-block:0;overflow:hidden}
 .footer-giant div{background:var(--graphite);font-family:var(--f-display);font-weight:900;font-size:clamp(56px,13vw,190px);line-height:.85;text-transform:uppercase;color:var(--blanc);padding-block:18px 8px;white-space:nowrap;overflow:hidden;text-overflow:clip}
 .legal{background:#0E0F11;color:#8F959C;display:flex;flex-wrap:wrap;gap:8px 22px;padding-block:18px;font-size:14px}
 .legal a{text-decoration:none}
@@ -401,3 +401,6 @@ details p{margin-top:8px;color:#33373C}
 .investor-page .side p{margin:16px 0}.investor-page .form-grid{margin-top:0}
 .investor-page #k-send{margin-top:12px}.investor-page #k-ok{margin-top:18px}
 @media(max-width:640px){.investor-steps{grid-template-columns:minmax(0,1fr);gap:18px}.investor-page>h1{font-size:44px}.investor-page .panel{padding:20px}}
+
+/* Maquette : le badge retiré ne laisse pas une colonne vide. */
+.who{grid-template-columns:minmax(0,1fr)}

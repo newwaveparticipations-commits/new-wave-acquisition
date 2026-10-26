@@ -1,4 +1,4 @@
-import { visuals } from './visuals.js';
+import { visuals } from './visuals.js?v=20261026';
 const $=id=>document.getElementById(id);
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 visuals();
